@@ -278,3 +278,171 @@ document.addEventListener("DOMContentLoaded", () => {
     observer.observe(el)
   })
 })
+   // Elements
+    const sliderTrack = document.getElementById('sliderTrack');
+    const sliderPrev = document.getElementById('sliderPrev');
+    const sliderNext = document.getElementById('sliderNext');
+    const sliderDots = document.getElementById('sliderDots');
+    const videoCards = document.querySelectorAll('.video-card');
+    
+    const videoPopup = document.getElementById('videoPopup');
+    const popupVideo = document.getElementById('popupVideo');
+    const popupClose = document.getElementById('popupClose');
+    const popupPrev = document.getElementById('popupPrev');
+    const popupNext = document.getElementById('popupNext');
+    const popupTitle = document.getElementById('popupTitle');
+    const popupDesc = document.getElementById('popupDesc');
+    const popupCounter = document.getElementById('popupCounter');
+
+    let currentSlide = 0;
+    let currentPopupIndex = 0;
+    const totalCards = videoCards.length;
+    let cardsPerView = 3;
+
+    // Video data
+    const videoData = [];
+    videoCards.forEach(card => {
+      const video = card.querySelector('video source');
+      const title = card.querySelector('.video-info h3').textContent;
+      const desc = card.querySelector('.video-info p').textContent;
+      videoData.push({
+        src: video.src,
+        title: title,
+        desc: desc
+      });
+    });
+
+    // Calculate cards per view based on screen size
+    function updateCardsPerView() {
+      if (window.innerWidth <= 640) {
+        cardsPerView = 1;
+      } else if (window.innerWidth <= 1024) {
+        cardsPerView = 2;
+      } else {
+        cardsPerView = 3;
+      }
+      createDots();
+      updateSlider();
+    }
+
+    // Create dots
+    function createDots() {
+      sliderDots.innerHTML = '';
+      const totalDots = Math.ceil(totalCards / cardsPerView);
+      for (let i = 0; i < totalDots; i++) {
+        const dot = document.createElement('button');
+        dot.className = `slider-dot ${i === 0 ? 'active' : ''}`;
+        dot.addEventListener('click', () => goToSlide(i));
+        sliderDots.appendChild(dot);
+      }
+    }
+
+    // Update slider position
+    function updateSlider() {
+      const cardWidth = videoCards[0].offsetWidth + 20; // card width + gap
+      const offset = currentSlide * cardWidth * cardsPerView;
+      sliderTrack.style.transform = `translateX(-${offset}px)`;
+
+      // Update dots
+      const dots = document.querySelectorAll('.slider-dot');
+      dots.forEach((dot, index) => {
+        dot.classList.toggle('active', index === currentSlide);
+      });
+
+      // Update arrow states
+      const maxSlide = Math.ceil(totalCards / cardsPerView) - 1;
+      sliderPrev.disabled = currentSlide === 0;
+      sliderNext.disabled = currentSlide >= maxSlide;
+    }
+
+    // Go to specific slide
+    function goToSlide(index) {
+      const maxSlide = Math.ceil(totalCards / cardsPerView) - 1;
+      currentSlide = Math.max(0, Math.min(index, maxSlide));
+      updateSlider();
+    }
+
+    // Slider navigation
+    sliderPrev.addEventListener('click', () => goToSlide(currentSlide - 1));
+    sliderNext.addEventListener('click', () => goToSlide(currentSlide + 1));
+
+    // Hover effect on cards - play video preview
+    videoCards.forEach(card => {
+      const video = card.querySelector('video');
+      
+      card.addEventListener('mouseenter', () => {
+        video.currentTime = 0;
+        video.play();
+      });
+      
+      card.addEventListener('mouseleave', () => {
+        video.pause();
+        video.currentTime = 0;
+      });
+    });
+
+    // Open popup
+    function openPopup(index) {
+      currentPopupIndex = index;
+      updatePopupContent();
+      videoPopup.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      popupVideo.play();
+    }
+
+    // Close popup
+    function closePopup() {
+      videoPopup.classList.remove('active');
+      document.body.style.overflow = '';
+      popupVideo.pause();
+    }
+
+    // Update popup content
+    function updatePopupContent() {
+      const data = videoData[currentPopupIndex];
+      popupVideo.src = data.src;
+      popupTitle.textContent = data.title;
+      popupDesc.textContent = data.desc;
+      popupCounter.textContent = `${currentPopupIndex + 1} / ${totalCards}`;
+      
+      popupPrev.disabled = currentPopupIndex === 0;
+      popupNext.disabled = currentPopupIndex === totalCards - 1;
+    }
+
+    // Navigate popup
+    function navigatePopup(direction) {
+      popupVideo.pause();
+      currentPopupIndex += direction;
+      currentPopupIndex = Math.max(0, Math.min(currentPopupIndex, totalCards - 1));
+      updatePopupContent();
+      popupVideo.play();
+    }
+
+    // Event listeners for popup
+    videoCards.forEach((card, index) => {
+      card.addEventListener('click', () => openPopup(index));
+    });
+
+    popupClose.addEventListener('click', closePopup);
+    popupPrev.addEventListener('click', () => navigatePopup(-1));
+    popupNext.addEventListener('click', () => navigatePopup(1));
+
+    // Close popup on background click
+    videoPopup.addEventListener('click', (e) => {
+      if (e.target === videoPopup) {
+        closePopup();
+      }
+    });
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (videoPopup.classList.contains('active')) {
+        if (e.key === 'Escape') closePopup();
+        if (e.key === 'ArrowLeft') navigatePopup(-1);
+        if (e.key === 'ArrowRight') navigatePopup(1);
+      }
+    });
+
+    // Initialize
+    updateCardsPerView();
+    window.addEventListener('resize', updateCardsPerView);

@@ -37,17 +37,173 @@
     </header>
 
     <!-- Full-screen hero section -->
-    <section class="hero">
-        <div class="hero-image">
-            <img src="/gallery/1764413895673.png" alt="Modern mimari tasarım">
-        </div>
-        <div class="hero-content">
-            <h1 class="hero-title">Yaşam Alanlarınızı Sanat Eserlerine Dönüştürüyoruz</h1>
-            <p class="hero-subtitle">Modern mimari tasarım ve planlamayla hayallerinizdeki mekanları yaratıyoruz</p>
-            <a href="#iletisim" class="btn btn-primary">Hemen İletişime Geçin</a>
-        </div>
+     <div class="video-slider" id="videoSlider">
+    <!-- Video Section 1 -->
+    <section class="video-section active" data-index="0">
+      <video autoplay muted loop playsinline>
+        <source src="videos/VDScn9D9U9QEs4LWPkexx_output.mp4" type="video/mp4">
+      </video>
+      <div class="video-overlay"></div>
+      <div class="scroll-indicator">
+        <span>Kaydır</span>
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+        </svg>
+      </div>
     </section>
+    </div>
 
+ <div class="progress-bar">
+    <div class="progress-fill" id="progressFill"></div>
+  </div>
+
+
+  <section class="video-gallery-section">
+    <div class="section-header">
+      <h2>Video Galeri</h2>
+      <p style="font-size: 40px;">Projelerimizi keşfedin</p>
+    </div>
+
+    <div class="video-slider-container">
+      <button class="slider-arrow prev" id="sliderPrev">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+        </svg>
+      </button>
+
+      <div class="video-slider-wrapper">
+        <div class="video-slider-track" id="sliderTrack">
+          <!-- Video Card 1 -->
+          
+
+          <!-- Video Card 2 -->
+          <div class="video-card" data-index="1">
+            <div class="video-thumbnail">
+              <video muted loop playsinline>
+                <source src="./videos/banQd7ad0kfRzjFqjARDH_output.mp4" type="video/mp4">
+              </video>
+              <div class="play-icon">
+                <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"></polygon></svg>
+              </div>
+            </div>
+            <div class="video-info">
+              <h3>Dış Mekan Tasarımı</h3>
+              <p>Villa projesi</p>
+            </div>
+          </div>
+
+          <!-- Video Card 3 -->
+          <div class="video-card" data-index="2">
+            <div class="video-thumbnail">
+              <video muted loop playsinline>
+                <source src="./videos/c0b2LOt8RvVby0Y-0XNVT_output.mp4" type="video/mp4">
+              </video>
+              <div class="play-icon">
+                <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"></polygon></svg>
+              </div>
+            </div>
+            <div class="video-info">
+              <h3>Modern ve Zarif Tasarımlar</h3>
+              <p>Yatak Odası Tasarımlarımız</p>
+            </div>
+          </div>
+
+          <!-- Video Card 4 -->
+          <div class="video-card" data-index="3">
+            <div class="video-thumbnail">
+              <video muted loop playsinline>
+                <source src="./videos/MXYlp53a_YncFYeAwL2o3_output.mp4" type="video/mp4">
+              </video>
+              <div class="play-icon">
+                <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"></polygon></svg>
+              </div>
+            </div>
+            <div class="video-info">
+              <h3>Akıllı Ev Sistemleri</h3>
+              <p>Otomasyon çözümleri</p>
+            </div>
+          </div>
+
+          <!-- Video Card 5 -->
+          <div class="video-card" data-index="4">
+            <div class="video-thumbnail">
+              <video muted loop playsinline>
+                <source src="./videos/VDScn9D9U9QEs4LWPkexx_output.mp4" type="video/mp4">
+              </video>
+              <div class="play-icon">
+                <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"></polygon></svg>
+              </div>
+            </div>
+            <div class="video-info">
+              <h3>Geniş Alan İç Mekan Tasarımları</h3>
+              <p>Geniş Çalışma Alanı</p>
+            </div>
+          </div>
+
+          <!-- Video Card 6 -->
+          <div class="video-card" data-index="5">
+            <div class="video-thumbnail">
+              <video muted loop playsinline>
+                <source src="./videos/video_1768316637942.mp4" type="video/mp4">
+              </video>
+              <div class="play-icon">
+                <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"></polygon></svg>
+              </div>
+            </div>
+            <div class="video-info">
+              <h3>Şık Tasarımlar</h3>
+              <p>İç Mekan Tasarımları</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button class="slider-arrow next" id="sliderNext">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+      </button>
+    </div>
+
+    <div class="slider-dots" id="sliderDots"></div>
+  </section>
+
+  <!-- Video Popup -->
+  <div class="video-popup" id="videoPopup">
+    <div class="popup-content">
+      <span class="popup-counter" id="popupCounter">1 / 6</span>
+      <button class="popup-close" id="popupClose">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+
+      <button class="popup-nav prev" id="popupPrev">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+        </svg>
+      </button>
+
+      <div class="popup-video-container">
+        <video id="popupVideo" controls>
+          <source src="" type="video/mp4">
+        </video>
+      </div>
+
+      <button class="popup-nav next" id="popupNext">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+      </button>
+
+      <div class="popup-info">
+        <h3 id="popupTitle">Video Başlığı</h3>
+        <p id="popupDesc">Video açıklaması</p>
+      </div>
+    </div>
+  </div>
+
+    
     <!-- Gallery Preview Section with square grid -->
 
     <!-- Contact CTA Section with black background -->
@@ -69,9 +225,6 @@
                         <h4 style="color: black;">Adres</h4>
                         <p>Sahrayıcedit Mah. İnönü Cad. Rızabey Sk. No: 2 Daire: 6 Kadıköy/ İstanbul</p>
                     </div>
-                </div>
-                <div class="btn-container">
-                    <a href="../iletisim.html" class="btn btn-primary">İletişim Formunu Doldurun</a>
                 </div>
             </div>
         </div>
@@ -104,7 +257,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>BK Mimarlık.</p>
+                <p>BS Mimarlık.</p>
             </div>
              <div style="display: flex; width: 100%; align-items: center; justify-content: center; margin-top: 10px;">
                 <p><a href="https://cefudigital.com">Creater  by CefuDigital</a></p>
