@@ -1342,7 +1342,7 @@ a {
 
     .video-card:hover {
       transform: translateY(-8px);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 20px 40px rgba(242, 242, 242, 0.4);
     }
 
     .video-thumbnail {
@@ -1385,7 +1385,7 @@ a {
     }
 
     .video-info {
-      padding: 16px;
+      padding: 15px;
     }
 
     .video-info h3 {
